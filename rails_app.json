@@ -1,0 +1,44 @@
+{
+  "run_list": [
+    "recipe[rails_app::web]",
+    //"recipe[postgresql]",
+    //"recipe[postgresql::server]",
+    "recipe[rails_app::database]",
+    "recipe[rails_app::app]",
+    "recipe[ssh-keys]"
+  ],
+
+  "postgresql": {
+    "password": {
+      "postgres": "thepassword"
+    },
+    "pg_hba": [
+      {
+        "type": "host",
+        "db": "all",
+        "user": "all",
+        "addr": "192.168.1.1/32",
+        "method": "md5"
+      },
+      {
+        "type": "host",
+        "db": "all",
+        "user": "all",
+        "addr": "127.0.0.1/32",
+        "method": "md5"
+      }
+    ]
+  },
+
+  "rails_app": {
+    "name": "blog",
+    "database": {
+      "user": "blog",
+      "password": "secretepassword"
+    }
+  },
+
+  "ssh_keys": {
+    "deploy": ["dshultz"]
+  }
+}

@@ -6,6 +6,12 @@
     "postgresql": {
       "locked_version": "3.0.2"
     },
+    "ssh-keys": {
+      "locked_version": "1.0.0"
+    },
+    "rails_app": {
+      "path": "./chef/cookbooks/rails_app"
+    },
     "build-essential": {
       "locked_version": "1.4.0"
     },
@@ -23,6 +29,33 @@
     },
     "openssl": {
       "locked_version": "1.0.2"
+    },
+    "postgres": {
+      "locked_version": "1.0.1"
+    },
+    "resource-control": {
+      "locked_version": "0.1.0"
+    },
+    "rbac": {
+      "locked_version": "1.0.1"
+    },
+    "smf": {
+      "locked_version": "1.5.0"
+    },
+    "ipaddr_extensions": {
+      "locked_version": "0.1.0"
+    },
+    "database": {
+      "locked_version": "1.4.0"
+    },
+    "mysql": {
+      "locked_version": "3.0.2"
+    },
+    "aws": {
+      "locked_version": "0.101.2"
+    },
+    "xfs": {
+      "locked_version": "1.1.0"
     }
   }
 }
