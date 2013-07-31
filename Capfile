@@ -3,10 +3,6 @@ load 'deploy'
     # load 'deploy/assets'
 load 'config/deploy' # remove this line to skip loading any of the default tasks
 
-ssh_options[:forward_agent] = true
-default_run_options[:pty] = true
-set(:use_sudo, false);
-
 def apt_install(package, update=false)
     apt_cmd = [
       "env",
