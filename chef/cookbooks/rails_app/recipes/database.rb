@@ -9,6 +9,7 @@
 
 include_recipe("postgresql")
 include_recipe("postgresql::server")
+include_recipe("postgresql::ruby")
 
 # use a custom hba_config
 hba_conf = resources("template[#{node['postgresql']['dir']}/pg_hba.conf]")
