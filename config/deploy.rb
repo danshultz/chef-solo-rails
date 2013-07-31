@@ -1,6 +1,10 @@
 require('bundler/capistrano')
 #%w(chef ).each { |x| load("config/recipes/#{x}.rb") }
 
+set(:stages, %w(production staging dev))
+set(:default_stage, "dev")
+require 'capistrano/ext/multistage'
+
 set(:user, ENV['AS'] || 'deploy')
 set(:password) {
   puts
@@ -16,10 +20,6 @@ set(:use_sudo, false);
 set(:deploy_via, :remote_cache)
 set(:deploy_to) { "/var/www/#{application}" }
 
-role(:rails_server, "192.168.24.100")
-role(:app, "192.168.24.100")
-role(:web, "192.168.24.100")
-role(:db, "192.168.24.100", :primary => true)
 
 task(:chef) {
   load("config/recipes/chef.rb")

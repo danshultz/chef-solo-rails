@@ -1,7 +1,7 @@
 set(:application, "chef")
 set(:repository, "git@github.com:danshultz/chef-solo-rails.git")
 
-set(:chef_base_path) { ENV['VAGRANT'] ? '/vagrant' : current_path }
+_cset(:chef_base_path) { current_path }
 set(:chef_cookbook_path) { File.join('/etc', 'chef', 'cookbooks') }
 set(:chef_role_path) { File.join(chef_base_path, 'chef', 'roles') }
 set(:chef_data_bag_path) { File.join(chef_base_path, 'chef', 'data_bags') }
