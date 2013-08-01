@@ -1,3 +1,5 @@
+require 'json'
+
 set(:application, "chef")
 set(:repository, "git@github.com:danshultz/chef-solo-rails.git")
 
@@ -5,7 +7,7 @@ _cset(:chef_base_path) { current_path }
 set(:chef_cookbook_path) { File.join('/etc', 'chef', 'cookbooks') }
 set(:chef_role_path) { File.join(chef_base_path, 'chef', 'roles') }
 set(:chef_data_bag_path) { File.join(chef_base_path, 'chef', 'data_bags') }
-set(:chef_attributes) { File.join(chef_base_path, "rails_app.json") }
+set(:chef_attributes) { File.join('/etc/chef', "attributes.json") }
 
 namespace(:deploy) do
   task(:migrate) { }
@@ -39,6 +41,10 @@ config
 
     sudo_bash("cd #{chef_base_path} && bundle install")
     sudo_bash("cd #{chef_base_path} && bundle exec berks install --path #{chef_cookbook_path}")
+    sudo_bash("if [ -e #{chef_attributes} ]; then rm #{chef_attributes}; fi;")
+    find_servers.each { |server|
+      put(JSON.pretty_generate(server.options[:chef_attributes]), chef_attributes, :hosts => server.host)
+    }
     sudo("chef-solo -j #{chef_attributes}")
   }
 
