@@ -12,6 +12,9 @@
     "rails_app": {
       "path": "./chef/cookbooks/rails_app"
     },
+    "baseline": {
+      "path": "./chef/cookbooks/baseline"
+    },
     "build-essential": {
       "locked_version": "1.4.0"
     },
