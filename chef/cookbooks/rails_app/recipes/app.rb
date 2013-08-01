@@ -21,17 +21,6 @@ directory("/var/www") do
 end
 
 
-group("admin") { action :create }
-
-
-file("/etc/sudoers.d/group_admin") do
-  owner "root"
-  group "root"
-  mode 0440
-  content "%admin ALL=(ALL) NOPASSWD: ALL"
-end
-
-
 directory(app_directory) do
   owner "deploy"
   mode 0755

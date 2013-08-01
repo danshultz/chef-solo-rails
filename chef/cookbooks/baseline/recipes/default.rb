@@ -7,6 +7,16 @@
 # All rights reserved - Do Not Redistribute
 #
 
+group("admin") { action :create }
+
+
+file("/etc/sudoers.d/group_admin") do
+  owner "root"
+  group "root"
+  mode 0440
+  content "%admin ALL=(ALL) NOPASSWD: ALL"
+end
+
 
 user("deploy") do
   home "/home/deploy"
