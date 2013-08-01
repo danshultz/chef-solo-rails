@@ -32,20 +32,6 @@ file("/etc/sudoers.d/group_admin") do
 end
 
 
-user("deploy") do
-  home "/home/deploy"
-  group "admin"
-  shell "/bin/bash"
-end
-
-
-directory("/home/deploy") do
-  owner "deploy"
-  mode 0755
-  action :create
-end
-
-
 directory(app_directory) do
   owner "deploy"
   mode 0755

@@ -1,11 +1,9 @@
 {
   "run_list": [
+    "recipe[baseline]",
     "recipe[rails_app::web]",
-    //"recipe[postgresql]",
-    //"recipe[postgresql::server]",
     "recipe[rails_app::database]",
-    "recipe[rails_app::app]",
-    "recipe[ssh-keys]"
+    "recipe[rails_app::app]"
   ],
 
   "postgresql": {
@@ -36,9 +34,6 @@
       "user": "blog",
       "password": "secretepassword"
     }
-  },
-
-  "ssh_keys": {
-    "deploy": ["dshultz"]
   }
+
 }
