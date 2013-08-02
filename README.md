@@ -9,10 +9,12 @@ This was developed for a talk [Cooking with Chef](http://danshultz.github.io/tal
 * Vagrant
 * Ruby >= 1.9.3
 * Bundler Gem
+* Git
 
 ### Quick Start
 
-1. Clone Repo
+1. Clone Repo. ```git clone https://github.com/danshultz/chef-solo-rails```
+1. ```cd chef-solo-rails```
 1. ```bundle install```
 1. ```vagrant up```
 1. Add your a new user databag to ```chef/data_bags/users``` like [dshultz.json](https://github.com/danshultz/chef-solo-rails/blob/master/chef/data_bags/users/dshultz.json)
