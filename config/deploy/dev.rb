@@ -1,6 +1,8 @@
 ssh_options[:paranoid] = false
+
+# Deploy the repository via copy to support local development
 set(:deploy_via, :copy)
-set(:chef_base_path, '/vagrant')
+
 
 role(:rails_server) {
   ["192.168.24.100", :chef_attributes => chef_attributes_data]
@@ -9,6 +11,8 @@ role(:app, "192.168.24.100")
 role(:web, "192.168.24.100")
 role(:db, "192.168.24.100", :primary => true)
 
+
+# Chef attribute data
 set(:chef_attributes_data) {
   {
     "run_list" => [
@@ -40,6 +44,7 @@ set(:chef_attributes_data) {
       ]
     },
 
+    # Rails app specific configuration
     "rails_app" => {
       "name" => "blog",
       "database" => {

@@ -1,8 +1,7 @@
 load 'deploy'
-# Uncomment if you are using Rails' asset pipeline
-    # load 'deploy/assets'
-load 'config/deploy' # remove this line to skip loading any of the default tasks
+load 'config/deploy'
 
+# Apt Install a package
 def apt_install(package, update=false)
     apt_cmd = [
       "env",
@@ -22,6 +21,8 @@ def apt_install(package, update=false)
     ].compact.join(' '))
 end
 
+
+# run apt update
 def apt_update
     apt_cmd = [
       "env",
@@ -34,6 +35,8 @@ def apt_update
     sudo_bash("#{apt_cmd} update")
 end
 
+
+# exectute a command untirely as sudo in bash
 def sudo_bash(cmd, options = {}, &blk)
   sudo("/bin/bash -c \'#{cmd}\'", options, &blk)
 end

@@ -1,19 +1,25 @@
+# Chef capistrano deployment configuration
+
 require 'json'
 
 set(:application, "chef")
 set(:repository, "git@github.com:danshultz/chef-solo-rails.git")
 
+# allow the chef_base_path to be overridden
 _cset(:chef_base_path) { current_path }
 set(:chef_cookbook_path) { File.join('/etc', 'chef', 'cookbooks') }
 set(:chef_role_path) { File.join(chef_base_path, 'chef', 'roles') }
 set(:chef_data_bag_path) { File.join(chef_base_path, 'chef', 'data_bags') }
 set(:chef_attributes) { File.join('/etc/chef', "attributes.json") }
 
+
+# Override the deploy:migrate task to prevent it from doing anything
 namespace(:deploy) do
   task(:migrate) { }
 end
 
 
+# Chef Specific tasks
 namespace(:_chef) do
 
   before('deploy:setup', '_chef:ensure_deploy')
@@ -23,6 +29,7 @@ namespace(:_chef) do
   after('deploy:update', '_chef:run')
 
 
+  desc("run chef solo")
   task(:run) {
     sudo_bash([
       "if [ ! -e /etc/chef ] || [ ! -e #{chef_cookbook_path} ]; then",
@@ -57,6 +64,8 @@ config
     sudo("chown -R #{user} #{deploy_to}")
   }
 
+
+  # setup and bootstrap chef
   task(:setup) {
 
     apt_cmd = [
