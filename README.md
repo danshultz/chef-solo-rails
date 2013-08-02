@@ -21,5 +21,14 @@ This was developed for a talk [Cooking with Chef](http://danshultz.github.io/tal
 1. Edit ```chef/cookbooks/baseline/recipes/default.rb``` to include your ssh key for the deploy user
 1. ```cap chef deploy:cold AS=vagrant``` (password is vagrant) ***
 
-*** This is required the first time a "deploy" is executed, each subsequent provision 
+*** This is required the first time a "deploy" is executed, each subsequent provision
 can simply use ```cap chef deploy```
+
+
+### Deploying a Rails Application after configuring with Chef
+
+1. Make sure to update the rails configuration details in [config/deploy/dev.rb](https://github.com/danshultz/chef-solo-rails/blob/master/config/deploy/dev.rb#L48)
+1. run ```cap chef deploy``` to make sure the updated rails app configurations are in place if you haven't done so
+1. Update any necessary configurations in [config/recipes/application.rb](https://github.com/danshultz/chef-solo-rails/blob/master/config/recipes/application.rb) for your rails app
+1. run ```cap app deploy:cold``` to deploy your application for the first time
+1. Review your deployed application at http://192.168.24.100
