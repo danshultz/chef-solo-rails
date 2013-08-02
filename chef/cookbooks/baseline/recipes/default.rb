@@ -32,9 +32,10 @@ directory("/home/deploy") do
 end
 
 
-include_recipe('ssh-keys')
-
-
 node.normal["ssh_keys"] = {
   "deploy" => ['dshultz']
 }
+
+
+include_recipe('ssh-keys')
+
