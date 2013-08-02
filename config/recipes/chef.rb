@@ -16,8 +16,9 @@ end
 
 namespace(:_chef) do
 
-  before('deploy:setup', '_chef:dir_hack')
+  before('deploy:setup', '_chef:ensure_deploy')
   before('deploy:cold', 'deploy:setup')
+  before('deploy', '_chef:ensure_deploy')
   after('deploy:setup', '_chef:setup')
   after('deploy:update', '_chef:run')
 
@@ -49,7 +50,9 @@ config
   }
 
 
-  task(:dir_hack) {
+  # Ensure ownership is set properly for deploy user
+  # I'm sure this is somehow unecessary
+  task(:ensure_deploy) {
     sudo("mkdir -p #{deploy_to}")
     sudo("chown -R #{user} #{deploy_to}")
   }
